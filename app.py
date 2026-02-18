@@ -1,116 +1,132 @@
 import streamlit as st
 import os
 
-# Configuración de la página (Pestaña del navegador)
+# Configuración de la página
 st.set_page_config(
     page_title="Overhauling Midlife Bike | Taller Tecnológico",
     page_icon="🚲",
     layout="wide"
 )
 
-# --- ESTILOS VISUALES ---
+# --- 1. ESTILOS Y PALETA DE COLORES ---
+# Azul OMB: #007BFF | Negro: #1E1E1E | Gris: #F5F5F5
 st.markdown("""
     <style>
     .main { background-color: #ffffff; }
-    .hero-title { font-size: 45px; font-weight: 700; text-align: center; color: #1E1E1E; margin-top: -20px; }
-    .sub-title { font-size: 20px; text-align: center; color: #5E5E5E; margin-bottom: 30px; }
-    .stButton>button { width: 100%; background-color: #007BFF; color: white; border-radius: 5px; height: 3em; font-weight: bold; }
+    
+    /* Contenedor del Banner con Texto Superpuesto */
+    .hero-container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+    
+    .hero-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro para resaltar texto */
+        padding: 40px;
+        border-radius: 15px;
+        width: 80%;
+    }
+    
+    .hero-title {
+        font-size: 64px !important;
+        font-weight: 800 !important;
+        color: #ffffff;
+        margin-bottom: 10px;
+        line-height: 1.1;
+    }
+    
+    .hero-subtitle {
+        font-size: 28px !important;
+        color: #007BFF; /* Usando nuestro Azul OMB */
+        font-weight: 500;
+    }
+
+    .section-header {
+        font-size: 32px;
+        font-weight: 700;
+        color: #1E1E1E;
+        border-bottom: 3px solid #007BFF;
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# --- 1. CABECERA ---
+# --- 2. CABECERA ---
 col_logo, col_nav = st.columns([1, 2])
 with col_logo:
     st.markdown("### Overhauling Midlife Bike 🚲")
 with col_nav:
-    st.markdown("<p style='text-align: right; padding-top: 10px;'>Servicios | Paint Studio | Upgrades | Proyectos | Agendar</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: right; padding-top: 10px; font-weight: bold;'>Servicios | Paint Studio | Upgrades | Proyectos | Agendar</p>", unsafe_allow_html=True)
 
-st.divider()
-
-# --- 2. SECCIÓN HERO (BANNER PRINCIPAL) ---
-# Usamos el nombre de archivo que definiste: fuji_mate_final.png
+# --- 3. SECCIÓN HERO (BANNER CON TEXTO DESTACADO) ---
 nombre_foto_principal = "fuji_mate_final.png"
 
 if os.path.exists(nombre_foto_principal):
-    st.image(nombre_foto_principal, use_container_width=True)
+    # Creamos el efecto de texto sobre la imagen
+    st.markdown(f"""
+        <div class="hero-container">
+            <img src="https://raw.githubusercontent.com/tu-usuario/overhauling-web/main/{nombre_foto_principal}" style="width:100%; border-radius: 15px;">
+            <div class="hero-overlay">
+                <div class="hero-title">La Reconstrucción de tu Pasión</div>
+                <div class="hero-subtitle">Mecánica avanzada, pintura custom y upgrades tecnológicos para ciclistas de alto nivel en Chile</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 else:
-    st.error(f"Archivo '{nombre_foto_principal}' no encontrado en GitHub. Por favor verifica que el nombre sea exacto.")
-    st.info("Sube la imagen a GitHub con el nombre: fuji_mate_final.png")
+    # Si no estás en la nube aún, usamos el método estándar para que no falle localmente
+    st.error("Para ver el diseño final con texto superpuesto, el archivo debe estar en GitHub. Mostrando versión local:")
+    st.image(nombre_foto_principal, use_container_width=True)
+    st.markdown('<div class="hero-title" style="color:#1E1E1E; text-align:center;">La Reconstrucción de tu Pasión</div>', unsafe_allow_html=True)
+    st.markdown('<div class="hero-subtitle" style="text-align:center;">Mecánica avanzada, pintura custom y upgrades tecnológicos para ciclistas de alto nivel en Chile</div>', unsafe_allow_html=True)
 
-st.markdown('<p class="hero-title">La Reconstrucción de tu Pasión</p>', unsafe_allow_html=True)
-st.markdown('<p class="sub-title">Mecánica avanzada, pintura custom y upgrades tecnológicos para ciclistas de alto nivel en Chile.</p>', unsafe_allow_html=True)
+st.markdown("<br><br>", unsafe_allow_html=True)
 
-if st.button("RESERVA TU DIAGNÓSTICO TÉCNICO PREMIUM"):
-    st.balloons()
-    st.success("¡Pronto habilitaremos la agenda en línea!")
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# --- 3. PROPUESTA DE VALOR ---
-st.header("Por qué elegir OMB")
+# --- 4. PROPUESTA DE VALOR ---
+st.markdown('<div class="section-header">Por qué elegir OMB</div>', unsafe_allow_html=True)
 cv1, cv2, cv3 = st.columns(3)
 with cv1:
-    st.subheader("🛡️ Precisión")
-    st.write("Ingeniería aplicada con herramientas de torque digital y los más altos estándares técnicos de fábrica.")
+    st.markdown("#### 🛡️ Precisión")
+    st.write("Ingeniería aplicada con torque digital y estándares de fábrica.")
 with cv2:
-    st.subheader("🎨 Estética")
-    st.write("Transformamos marcos de carbono en piezas únicas de colección con acabados de autor en nuestro Paint Studio.")
+    st.markdown("#### 🎨 Estética")
+    st.write("Marcos de carbono transformados en piezas únicas de autor.")
 with cv3:
-    st.subheader("🏁 ADN Competitivo")
-    st.write("Especialistas en las exigencias técnicas del Triatlón, Ruta, MTB y Gravel de alta gama.")
-
-st.divider()
-
-# --- 4. SERVICIOS ---
-st.header("Nuestros Servicios Especializados")
-s1, s2, s3 = st.columns(3)
-with s1:
-    st.markdown("### Overhaul Mecánico")
-    st.write("- Desarme íntegro del cuadro\n- Inspección de fatiga en carbono\n- Limpieza técnica profesional\n- Re-ensamblaje bajo normas de fábrica")
-with s2:
-    st.markdown("### Paint Studio")
-    st.write("- Diseños personalizados únicos\n- Recuperación de acabados originales\n- Protección cerámica industrial\n- Acabados mate y gloss de alta durabilidad")
-with s3:
-    st.markdown("### Tech Upgrades")
-    st.write("- Instalación de grupos electrónicos\n- Calibración de potenciómetros\n- Optimización de rendimiento\n- Diagnóstico de firmware")
+    st.markdown("#### 🏁 ADN Competitivo")
+    st.write("Especialistas en Triatlón y Ruta de alta gama.")
 
 st.divider()
 
 # --- 5. SECCIÓN ANTES Y DESPUÉS ---
-st.header("Caso de Éxito: Transformación Fuji")
-st.write("Visualiza el nivel de detalle de nuestro trabajo (Imágenes de referencia OMB)")
-
+st.markdown('<div class="section-header">Caso de Éxito: Transformación Fuji</div>', unsafe_allow_html=True)
 col_a, col_b = st.columns(2)
 with col_a:
     st.subheader("Antes")
-    # Puedes subir tu foto original como 'fuji_antes.png'
     if os.path.exists("fuji_antes.png"):
         st.image("fuji_antes.png", use_container_width=True)
-    else:
-        st.caption("Esperando archivo: fuji_antes.png")
-
 with col_b:
     st.subheader("Después")
-    # Aquí mostramos de nuevo el resultado final para el comparativo
     if os.path.exists("fuji_mate_final.png"):
         st.image("fuji_mate_final.png", use_container_width=True)
-    else:
-        st.caption("Esperando archivo: fuji_mate_final.png")
 
-st.divider()
-
-# --- 7. FORMULARIO DE CONTACTO ---
-st.header("Agenda tu Diagnóstico")
+# --- 6. AGENDAR ---
+st.markdown('<div class="section-header">Agenda tu Diagnóstico</div>', unsafe_allow_html=True)
 with st.form("contacto_form"):
-    nombre = st.text_input("Nombre y Apellido")
-    correo = st.text_input("Email")
-    tipo_bici = st.selectbox("Tipo de Bicicleta", ["Ruta", "MTB", "Gravel", "Triatlón"])
-    interes = st.multiselect("Servicio de Interés", ["Overhaul Mecánico", "Pintura Custom", "Upgrades Electrónicos"])
-    comentario = st.text_area("Detalles de tu bicicleta (Marca, modelo, año)")
+    col_f1, col_f2 = st.columns(2)
+    with col_f1:
+        nombre = st.text_input("Nombre y Apellido")
+        correo = st.text_input("Email")
+    with col_f2:
+        tipo_bici = st.selectbox("Tipo de Bicicleta", ["Ruta", "MTB", "Gravel", "Triatlón"])
+        interes = st.multiselect("Servicio", ["Overhaul", "Pintura", "Upgrades"])
     
-    enviado = st.form_submit_button("Enviar Solicitud")
+    enviado = st.form_submit_button("ENVIAR SOLICITUD DE REVISIÓN")
     if enviado:
-        st.success(f"Gracias {nombre}, hemos recibido la información de tu {tipo_bici}. Nos contactaremos a {correo}.")
+        st.success("Solicitud recibida. Nos contactaremos en menos de 24 horas.")
 
-# --- 8. FOOTER ---
 st.markdown("<br><hr><center>Overhauling Midlife Bike - Tecnología • Artesanía • Performance<br>Santiago, Chile</center>", unsafe_allow_html=True)
