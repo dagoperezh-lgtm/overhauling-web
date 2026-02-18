@@ -13,29 +13,50 @@ st.markdown("""
     <style>
     .main { background-color: #ffffff; }
     
-    /* Estilo para el Mensaje Principal Destacado */
-    .highlight-container {
-        text-align: center;
-        padding: 60px 20px;
-        background-color: #ffffff;
-    }
-    
+    /* Títulos Principales */
     .main-title {
-        font-size: 72px !important;
+        font-size: 64px !important;
         font-weight: 800 !important;
         color: #1E1E1E;
-        margin-bottom: 20px;
+        text-align: center;
+        margin-bottom: 10px;
         line-height: 1.1;
-        letter-spacing: -1px;
     }
     
     .main-subtitle {
-        font-size: 32px !important;
-        color: #007BFF; /* Azul OMB */
+        font-size: 28px !important;
+        color: #007BFF;
+        text-align: center;
         font-weight: 400;
-        max-width: 900px;
-        margin: 0 auto;
-        line-height: 1.4;
+        margin-bottom: 40px;
+    }
+
+    /* Sección de Manifiesto Industrial */
+    .manifesto-container {
+        background-color: #F8F9FA;
+        padding: 60px;
+        border-radius: 20px;
+        margin: 40px 0;
+        border-left: 8px solid #007BFF;
+    }
+    
+    .manifesto-title {
+        font-size: 36px;
+        font-weight: 700;
+        color: #1E1E1E;
+        margin-bottom: 25px;
+    }
+
+    .manifesto-body {
+        font-size: 19px;
+        line-height: 1.6;
+        color: #333333;
+        text-align: justify;
+    }
+
+    .highlight-blue {
+        color: #007BFF;
+        font-weight: 700;
     }
 
     .section-header {
@@ -58,66 +79,79 @@ with col_nav:
     st.markdown("<p style='text-align: right; padding-top: 10px; font-weight: bold;'>Servicios | Paint Studio | Upgrades | Proyectos | Agendar</p>", unsafe_allow_html=True)
 
 # --- 2. BANNER PRINCIPAL ---
-# Usamos tu foto fuji_mate_final.png que ya ajustaste manualmente
 nombre_foto_principal = "fuji_mate_final.png"
-
 if os.path.exists(nombre_foto_principal):
     st.image(nombre_foto_principal, use_container_width=True)
-else:
-    st.warning(f"Esperando archivo: {nombre_foto_principal}")
 
-# --- 3. MENSAJE DESTACADO (FUENTES AGRANDADAS) ---
+# --- 3. MENSAJE DESTACADO ---
+st.markdown('<div class="main-title">La Reconstrucción de tu Pasión</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-subtitle">Mecánica avanzada, pintura custom y upgrades tecnológicos para ciclistas de alto nivel en Chile</div>', unsafe_allow_html=True)
+
+st.divider()
+
+# --- 4. SECCIÓN INDUSTRIAL (EL MANIFIESTO) ---
 st.markdown(f"""
-    <div class="highlight-container">
-        <div class="main-title">La Reconstrucción de tu Pasión</div>
-        <div class="main-subtitle">
-            Mecánica avanzada, pintura custom y upgrades tecnológicos <br>
-            para ciclistas de alto nivel en Chile.
+    <div class="manifesto-container">
+        <div class="manifesto-title">Recuperamos el valor de tu bicicleta. Como lo hacen las grandes industrias.</div>
+        <div class="manifesto-body">
+            Trajimos las mejores prácticas de las grandes compañías intensivas en activos y alta tecnología a una escala más cercana: <b>la del ciclista.</b><br><br>
+            Porque para un ciclista de ruta, MTB, gravel o triatlón, su bicicleta no es solo un medio de transporte: <span class="highlight-blue">es su principal activo deportivo.</span> Y como todo activo valioso, pierde valor con el tiempo si no se mantiene, se actualiza y se gestiona correctamente.<br><br>
+            En la gran industria, los activos de alto valor no se desechan. Se reacondicionan, se optimizan y se someten a procesos rigurosos de mantenimiento y mejora para devolverles su rendimiento original… o incluso superarlo. Todo esto con un costo significativamente menor que adquirir un activo nuevo y evitando el riesgo de invertir en algo que no cumpla las prestaciones esperadas.<br><br>
+            <b>Esa misma lógica aplica para tu bicicleta.</b>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-st.divider()
+# --- 5. DETALLES TÉCNICOS ---
+col_desc1, col_desc2 = st.columns(2)
 
-# --- 4. PROPUESTA DE VALOR ---
-st.markdown('<div class="section-header">Por qué elegir OMB</div>', unsafe_allow_html=True)
-cv1, cv2, cv3 = st.columns(3)
-with cv1:
-    st.markdown("#### 🛡️ Precisión")
-    st.write("Ingeniería aplicada con torque digital y los más altos estándares técnicos de fábrica.")
-with cv2:
-    st.markdown("#### 🎨 Estética")
-    st.write("Transformamos marcos de carbono en piezas únicas de autor en nuestro Paint Studio.")
-with cv3:
-    st.markdown("#### 🏁 ADN Competitivo")
-    st.write("Especialistas en las exigencias técnicas del Triatlón, Ruta y MTB de alta gama.")
+with col_desc1:
+    st.markdown("### Procesos Profesionales")
+    st.write("""
+    * **Pintura premium** con terminaciones de nivel fábrica.
+    * **Ajustes mecánicos finos** y calibración completa.
+    * **Mantenciones profundas** y reacondicionamiento integral.
+    * **Reemplazo de componentes** de desgaste (cables, rodamientos, transmisión).
+    * **Upgrades tecnológicos** (ruedas, frenos, transmisiones electrónicas).
+    """)
 
-# --- 5. SECCIÓN ANTES Y DESPUÉS ---
+with col_desc2:
+    st.markdown("### El Valor de Renovar")
+    st.write("""
+    * **Mantienes tu cuadro y geometría**, sin periodos de adaptación.
+    * **Recuperas confianza** y rendimiento en competencias.
+    * **Revalorizas tu activo** para el mercado de segunda mano.
+    * **Alternativa inteligente** frente a los precios de bicicletas nuevas.
+    """)
+
+st.markdown("""
+    <div style="text-align: center; padding: 30px; font-style: italic; font-size: 20px;">
+        "Una decisión racional. Y también emocional. Porque renovar tu bicicleta es devolverle vida a una máquina que todavía tiene mucho por entregar."
+    </div>
+    """, unsafe_allow_html=True)
+
+# --- 6. ANTES Y DESPUÉS ---
 st.markdown('<div class="section-header">Caso de Éxito: Transformación Fuji</div>', unsafe_allow_html=True)
 col_a, col_b = st.columns(2)
 with col_a:
-    st.subheader("Antes")
     if os.path.exists("fuji_antes.png"):
-        st.image("fuji_antes.png", use_container_width=True)
+        st.image("fuji_antes.png", caption="Antes", use_container_width=True)
 with col_b:
-    st.subheader("Después")
     if os.path.exists("fuji_mate_final.png"):
-        st.image("fuji_mate_final.png", use_container_width=True)
+        st.image("fuji_mate_final.png", caption="Después (Negro Mate & Yellow Stickers)", use_container_width=True)
 
-# --- 6. AGENDAR ---
+# --- 7. AGENDAR ---
 st.markdown('<div class="section-header">Agenda tu Diagnóstico Técnico</div>', unsafe_allow_html=True)
 with st.form("contacto_form"):
     col_f1, col_f2 = st.columns(2)
     with col_f1:
-        nombre = st.text_input("Nombre y Apellido")
+        nombre = st.text_input("Nombre")
         correo = st.text_input("Email")
     with col_f2:
-        tipo_bici = st.selectbox("Tipo de Bicicleta", ["Ruta", "MTB", "Gravel", "Triatlón"])
-        interes = st.multiselect("Servicio de Interés", ["Overhaul", "Pintura", "Upgrades"])
+        tipo_bici = st.selectbox("Disciplina", ["Ruta", "Triatlón", "MTB", "Gravel"])
+        interes = st.multiselect("Servicio", ["Overhaul", "Pintura", "Upgrades"])
     
-    enviado = st.form_submit_button("SOLICITAR REVISIÓN PROFESIONAL")
-    if enviado:
-        st.success(f"Gracias {nombre}. Nos contactaremos a {correo} para coordinar la recepción.")
+    if st.form_submit_button("SOLICITAR EVALUACIÓN"):
+        st.success("Mensaje enviado con éxito.")
 
-# --- 7. FOOTER ---
-st.markdown("<br><hr><center>Overhauling Midlife Bike - Tecnología • Artesanía • Performance<br>Santiago, Chile</center>", unsafe_allow_html=True)
+st.markdown("<br><hr><center>Overhauling Midlife Bike - Lampa, Chile</center>", unsafe_allow_html=True)
